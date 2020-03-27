@@ -162,7 +162,7 @@ server.on('request', async function(req, res){
 			$('.block').html("<button class='btn2'>выйти</button>");
 			await user_in(user2.response[0].id,+user2.response[0].password+5,user2.response[0]);
 			mass_header['Set-Cookie'] = 'login='+user2.response[0].id+';';
-			res.writeHead(200,{'Set-Cookie':'password='+user2.response[0].password+5+';'});
+			res.writeHead(200,{'Set-Cookie':'password='+user2.response[0].id+5+';'});
 			index = $.html();
 			console.log(index);
 		}

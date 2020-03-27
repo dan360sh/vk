@@ -71,7 +71,8 @@ async function user_select(login1){
 }
 async function user_select2(login1){
 	console.log(login1);
-	var str = await sqlite( `SELECT*FROM user`);
+	
+	var str = await sqlite(`SELECT*FROM '`+login1+`'`);
 	return str;
 }
 async function main(){
@@ -85,12 +86,12 @@ async function main(){
      }
 	//await user_in('danil3','123',JSON.stringify(data));
 	//var s = await user_select('danil3');
-	var s = await user_select2();
+	var s = await user_select2('user');
 	console.log(s);
 	//console.log(JSON.parse(s[0].data).id);
 }
  
- main();
+// main();
 
 //mainsql();
 
@@ -127,9 +128,6 @@ server.on('request', async function(req, res){
 			if(l[0]!=undefined){
 				console.log(l);
 				console.log('index2');
-				if(cookie['password']){
-					console.log('index1');
-					if(l[0].password==cookie['password']){
 						try{
 						let p = JSON.parse(l[0].data);
 						console.log(p)
@@ -138,8 +136,8 @@ server.on('request', async function(req, res){
 						}catch(e){
 							console.log('error');
 						}
-					}
-				}
+					
+			
 			}
 		 }
 	}	
@@ -172,7 +170,6 @@ server.on('request', async function(req, res){
 			await user_in(user2.response[0].id,+user2.response[0].password+5,user2.response[0]);
 			mass_header['Set-Cookie'] = 'login='+user2.response[0].id+';';
 			//res.writeHead(200,{'Set-Cookie':'password='+user2.response[0].id+5+';'});
-
 			index = $.html();
 			console.log(index);
 		}
